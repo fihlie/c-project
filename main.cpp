@@ -15,7 +15,7 @@ Notes: Anything you want to say about your code that will be helpful in the grad
 using namespace std;
 void parseInput(ifstream& inFile,int &  N,int &  M, vector<int>& v);
 vector<long long int>calculate(vector<long long int>v,int M,int N);
-vector<long long int> convertVector(int M, int N, vector<int> v);
+vector<long long int> convertVector(vector<int> v);
 int main(int argc, char* argv[]){
     ifstream inFile(argv[1]);
     ofstream outFile(argv[2]);
@@ -23,13 +23,12 @@ int main(int argc, char* argv[]){
     vector<int> v(200001,0);
     parseInput(inFile,N,M,v);
     vector<long long int> newVersion;
-    newVersion=convertVector(M,N,v);
+    newVersion=convertVector(v);
     vector<long long int> finalVersion;
     finalVersion=calculate(newVersion,M,N);
     for(int i=0;i<N;i++){
         outFile<<finalVersion[i]<<" ";
     }
-
     return 0;
 }//Reading from a file and Bucket sort
 void parseInput(ifstream& inFile,int &  N,int &  M, vector<int>& v) {
@@ -51,10 +50,9 @@ void parseInput(ifstream& inFile,int &  N,int &  M, vector<int>& v) {
     inFile.close();
 }
 
-vector<long long int> convertVector(int M, int N, vector<int> v){
+vector<long long int> convertVector(vector<int> v){
     vector<long long int> temp;
     int count=0;
-    long long int total=0;
     for(int i=0;i<v.size();i++){
         if(v[i]!=0){
             count++;
